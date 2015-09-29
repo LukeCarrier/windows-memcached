@@ -73,7 +73,7 @@ $buildDir     = (Join-Path $rootDir "build")
 $mingRootDir  = "/c/windows-memcached"
 $mingBuildDir = (Join-MingPath $mingRootDir "build")
 
-# Build configuration
+# Memcached configuration
 $memcachedVer     = "1.4.24"
 $memcachedUrl     = "http://www.memcached.org/files/memcached-$($memcachedVer).tar.gz"
 $memcachedTar     = (Join-Path $buildDir "memcached-$($memcachedVer).tar.gz")
@@ -81,8 +81,23 @@ $mingMemcachedTar = (Join-MingPath $mingBuildDir "memcached-$($memcachedVer).tar
 $memcachedSum     = "4e8285e2407a2fcf43cd2b6084d61bb5"
 $mingMemcachedSrc = (Join-MingPath $mingBuildDir "memcached-$($memcachedVer)")
 
+# libevent configuration
+$libeventSeries  = "2.0"
+$libeventVer     = "$($libeventSeries).22-stable"
+$libeventUrl     = "https://sourceforge.net/projects/levent/files/libevent/libevent-$($libeventSeries)/libevent-$($libeventVer).tar.gz"
+$libeventTar     = (Join-Path $buildDir "libevent-$($libeventVer).tar.gz")
+$mingLibeventTar = (Join-MingPath $mingBuildDir "libevent-$($libeventVer).tar.gz")
+$libeventSum     = "c4c56f986aa985677ca1db89630a2e11"
+$mingLibeventSrc = (Join-MingPath $mingBuildDir "libevent-$($libeventVer)")
+
+# MSYS utilities required for the build
 Install-MinGWDependency "msys-gzip"
 Install-MinGWDependency "msys-tar"
 
+# libevent
+Download-File $libeventUrl $libeventTar $libeventSum
+Extract-GzippedTarball $mingLibeventTar $mingBuildDir
+
+# memcached
 Download-File $memcachedUrl $memcachedTar $memcachedSum
 Extract-GzippedTarball $mingMemcachedTar $mingBuildDir
