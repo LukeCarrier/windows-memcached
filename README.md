@@ -14,9 +14,7 @@ Don't use this. Especially not in production.
 
 ## Installing
 
-1. Download and install [MinGW](http://www.mingw.org/).
-2. Install [MSYS](http://www.mingw.org/wiki/msys) and ensure ```fstab``` is
-   configured correctly for your system.
+1. Download and install [MSYS2](http://www.mingw.org/).
 
 ## Building
 
